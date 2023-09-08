@@ -60,12 +60,13 @@ const deleteUser = async (req, res) => {
 
 //when you write a message from frontend you need to use createMessage() and addMessageToUserSender() and addMessageToUserRec()
 
+//alternative to having two methods -> work with one and an additional parameter in the body (like "role": sender/receiver)
 const addMessageToUserSender = async (req, res) => {
     const { id } = req.params;
     const { messageid } = req.body;
     try{
-        const updatedToDoUser = await User.findByIdAndUpdate(id, {$addtoSet: {gesendet: messageid}}, {new: true}).exec();
-        res.status(200).json(updatedToDoUser);
+        const updatedUser = await User.findByIdAndUpdate(id, {$addtoSet: {gesendet: messageid}}, {new: true}).exec();
+        res.status(200).json(updatedUser);
     }
     catch(err){
         res.status(404).send(err.message);
@@ -76,8 +77,32 @@ const addMessageToUserReceiver = async (req, res) => {
     const { id } = req.params;
     const { messageid } = req.body;
     try{
-        const updatedToDoUser = await User.findByIdAndUpdate(id, {$addtoSet: {empfangen: messageid}}, {new: true}).exec();
-        res.status(200).json(updatedToDoUser);
+        const updatedUser = await User.findByIdAndUpdate(id, {$addtoSet: {empfangen: messageid}}, {new: true}).exec();
+        res.status(200).json(updatedUser);
+    }
+    catch(err){
+        res.status(404).send(err.message);
+    }
+}
+
+const removeMessageFromUserSender = async (req, res) => {
+    const { id } = req.params;
+    const { messageid } = req.body;
+    try{
+        const updatedUser = await User.findByIdAndUpdate(id, {$pull: {gesendet: messageid}}, {new: true}).exec(); //$pull removes elements from an array field
+        res.status(200).json(updatedUser);
+    }
+    catch(err){
+        res.status(404).send(err.message);
+    }
+}
+
+const removeMessageFromUserReceiver = async (req, res) => {
+    const { id } = req.params;
+    const { messageid } = req.body;
+    try{
+        const updatedUser = await User.findByIdAndUpdate(id, {$pull: {empfangen: messageid}}, {new: true}).exec();
+        res.status(200).json(updatedUser);
     }
     catch(err){
         res.status(404).send(err.message);
@@ -91,5 +116,7 @@ module.exports = {
     updateUser,
     deleteUser,
     addMessageToUserSender,
-    addMessageToUserReceiver
+    addMessageToUserReceiver,
+    removeMessageFromUserSender,
+    removeMessageFromUserReceiver
 }
