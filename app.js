@@ -4,6 +4,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 
+//get Routers:
+const UserRouter = require("./routes/User");
+const NachrichtRouter = require("./routes/Nachricht");
+
 //set up/integrate database:
 const db = require("./db/db");
 db();
@@ -21,6 +25,9 @@ app.use(cors());
 app.get("/", (req, res) => {
     res.send("Hello World!");
 })
+
+//integrate Routers:
+app.use("/", UserRouter, NachrichtRouter);
 
 
 app.listen(PORT);
