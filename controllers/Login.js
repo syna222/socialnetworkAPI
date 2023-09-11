@@ -1,6 +1,5 @@
 //require the model to query db:
 const User = require("../models/User");
-const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
