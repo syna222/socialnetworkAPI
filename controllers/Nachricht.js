@@ -15,7 +15,7 @@ const createNachricht = async (req, res) => {
     const { von, an, text } = req.body;
     try{
         const newNachricht = await Nachricht.create({ von, an, text});  //date is created by default by mongoose
-        res.status(201).json(newNachricht);
+        res.status(201).json(newNachricht); //nur id zurück?
     }
     catch(err){
         res.status(404).send(err.message);
