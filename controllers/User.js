@@ -65,7 +65,7 @@ const addMessageToUserSender = async (req, res) => {
     const { id } = req.params;
     const { messageid } = req.body;
     try{
-        const updatedUser = await User.findByIdAndUpdate(id, {$addtoSet: {gesendet: messageid}}, {new: true}).exec();
+        const updatedUser = await User.findByIdAndUpdate(id, {$addToSet: {gesendet: messageid}}, {new: true}).exec();
         res.status(200).json(updatedUser);
     }
     catch(err){
@@ -77,7 +77,7 @@ const addMessageToUserReceiver = async (req, res) => {
     const { id } = req.params;
     const { messageid } = req.body;
     try{
-        const updatedUser = await User.findByIdAndUpdate(id, {$addtoSet: {empfangen: messageid}}, {new: true}).exec();
+        const updatedUser = await User.findByIdAndUpdate(id, {$addToSet: {empfangen: messageid}}, {new: true}).exec();
         res.status(200).json(updatedUser);
     }
     catch(err){
