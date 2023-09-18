@@ -8,18 +8,25 @@ const { Schema } = mongoose;
 const Nachricht = new Schema({
     datum: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        required: true
     },
     von: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users"
+        ref: "users",
+        required: true
     }, 
     an: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users"
+        ref: "users",
+        required: true
+    },
+    betreff: {
+        type: String,
     },
     text: {
-        type: String
+        type: String,
+        required: true
     }
 });
 
