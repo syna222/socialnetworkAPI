@@ -8,6 +8,7 @@ const cors = require("cors");
 const UserRouter = require("./routes/User");
 const NachrichtRouter = require("./routes/Nachricht");
 const LoginRouter = require("./routes/Login");
+const PostRouter = require("./routes/Post");
 
 //set up/integrate database:
 const db = require("./db/db");
@@ -28,7 +29,7 @@ app.get("/", (req, res) => {
 })
 
 //integrate Routers:
-app.use("/", UserRouter, NachrichtRouter, LoginRouter);
+app.use("/", UserRouter, NachrichtRouter, LoginRouter, PostRouter);
 
 
 app.listen(PORT);
