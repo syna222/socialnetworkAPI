@@ -3,7 +3,7 @@ const Post = require("../models/Post");
 
 const getAllPosts = async (req, res) => {
     try{
-        const posts = await Post.find();
+        const posts = await Post.find().sort({ datum: 'desc' });
         res.status(200).json(posts);
     } 
     catch(err){
@@ -22,7 +22,19 @@ const createPost = async (req, res) => {
     }
 }
 
+const deletePost = async (req, res) => {
+    const { id } = req.params;
+    try{
+        const deletedPost = await Post.findByIdAndDelete(id);
+        res.status(200).json(`The post with the id ${id} has successfully been deleted.`)
+    }
+    catch(err){
+        res.status(404).send(err.message);
+    }
+}
+
 module.exports = {
     getAllPosts,
-    createPost
+    createPost,
+    deletePost
 }
