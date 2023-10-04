@@ -21,9 +21,6 @@ const Nachricht = new Schema({
         ref: "users",
         required: true
     },
-    betreff: {
-        type: String,
-    },
     text: {
         type: String,
         required: true
