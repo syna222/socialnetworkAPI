@@ -27,6 +27,11 @@ const User = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "nachrichten", //references other collection
         default: []
+    }],
+    interaktion: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users", //references same collection?
+        default: []
     }]
 });
 

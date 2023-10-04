@@ -9,7 +9,8 @@ const {
     addMessageToUserSender,
     addMessageToUserReceiver,
     removeMessageFromUserSender,
-    removeMessageFromUserReceiver
+    removeMessageFromUserReceiver,
+    addInterlocutor
 }           = require("../controllers/User");
 const auth = require("../middleware/auth");
 
@@ -21,5 +22,6 @@ router.route("/users/:id/addnachrichtsender").post(addMessageToUserSender);  //A
 router.route("/users/:id/addnachrichtrec").post(addMessageToUserReceiver);
 router.route("/users/:id/removenachrichtsender").put(removeMessageFromUserSender); //put instead of delete because the whole array field shouldn't be delete but updated
 router.route("/users/:id/removenachrichtrec").put(removeMessageFromUserReceiver);
+router.route("/users/:id/addinterlocutor").post(addInterlocutor);
 
 module.exports = router;
