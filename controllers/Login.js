@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
     const { email, passwort } = req.body;
     try{
-        const [user] = await User.find({ email, passwort }).populate("gesendet").populate("empfangen");
+        const [user] = await User.find({ email, passwort }).populate("interaktion");
         if(user){
             const token = jwt.sign({ _id: user.id}, process.env.JWT_SECRET); //token in app localstorage speichern und abgreifen für middleware auth, die vor routes gespannt wird
             return res.status(200).send({ token, user });

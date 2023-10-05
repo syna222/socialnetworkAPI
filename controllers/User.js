@@ -25,7 +25,7 @@ const createUser = async (req, res) => {
 const getSingleUser = async (req, res) => {
     const { id } = req.params; //usually via url
     try{
-        const user = await User.findById(id).populate("gesendet").populate("empfangen");
+        const user = await User.findById(id).populate("interaktion");
         res.status(200).json(user);
     }
     catch(err){
