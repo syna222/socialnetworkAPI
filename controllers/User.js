@@ -79,9 +79,5 @@ module.exports = {
     getSingleUser,
     updateUser,
     deleteUser,
-    addMessageToUserSender,
-    addMessageToUserReceiver,
-    removeMessageFromUserSender,
-    removeMessageFromUserReceiver,
     addInterlocutor
 }

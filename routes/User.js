@@ -6,10 +6,6 @@ const {
     getSingleUser,
     updateUser,
     deleteUser,
-    addMessageToUserSender,
-    addMessageToUserReceiver,
-    removeMessageFromUserSender,
-    removeMessageFromUserReceiver,
     addInterlocutor
 }           = require("../controllers/User");
 const auth = require("../middleware/auth");
