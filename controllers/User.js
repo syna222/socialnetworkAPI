@@ -58,57 +58,8 @@ const deleteUser = async (req, res) => {
     }
 }
 
-//when you write a message from frontend you need to use createMessage() and addMessageToUserSender() and addMessageToUserRec()
+
 //when you write a message from frontend check if sender's id is in recipients interaktion field and if recipient's id is in sender's interaktion field! (otherwise, use addInterlocutor())
-
-//alternative to having two methods -> work with one and an additional parameter in the body (like "role": sender/receiver)
-const addMessageToUserSender = async (req, res) => {
-    const { id } = req.params;
-    const { messageid } = req.body;
-    try{
-        const updatedUser = await User.findByIdAndUpdate(id, {$addToSet: {gesendet: messageid}}, {new: true}).exec();
-        res.status(200).json(updatedUser);
-    }
-    catch(err){
-        res.status(404).send(err.message);
-    }
-}
-
-const addMessageToUserReceiver = async (req, res) => {
-    const { id } = req.params;
-    const { messageid } = req.body;
-    try{
-        const updatedUser = await User.findByIdAndUpdate(id, {$addToSet: {empfangen: messageid}}, {new: true}).exec();
-        res.status(200).json(updatedUser);
-    }
-    catch(err){
-        res.status(404).send(err.message);
-    }
-}
-
-const removeMessageFromUserSender = async (req, res) => {
-    const { id } = req.params;
-    const { messageid } = req.body;
-    try{
-        const updatedUser = await User.findByIdAndUpdate(id, {$pull: {gesendet: messageid}}, {new: true}).exec(); //$pull removes elements from an array field
-        res.status(200).json(updatedUser);
-    }
-    catch(err){
-        res.status(404).send(err.message);
-    }
-}
-
-const removeMessageFromUserReceiver = async (req, res) => {
-    const { id } = req.params;
-    const { messageid } = req.body;
-    try{
-        const updatedUser = await User.findByIdAndUpdate(id, {$pull: {empfangen: messageid}}, {new: true}).exec();
-        res.status(200).json(updatedUser);
-    }
-    catch(err){
-        res.status(404).send(err.message);
-    }
-}
 
 const addInterlocutor = async (req, res) => {
     const { id } = req.params; //id of user who's interaktion field is changed

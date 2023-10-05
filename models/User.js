@@ -18,18 +18,8 @@ const User = new Schema({
         type: String,
         required: true
     },
-    empfangen: [{
-        type: mongoose.Schema.Types.ObjectId,  //das bedeutet ja nur, das hierin die ids der Nachrichten mit user als Empfänger gespeichert werden
-        ref: "nachrichten", //references other collection
-        default: []
-    }],
-    gesendet: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "nachrichten", //references other collection
-        default: []
-    }],
     interaktion: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,  //das bedeutet ja nur, das hierin die ids der Nachrichten mit user als Empfänger gespeichert werden
         ref: "users", //references same collection?
         default: []
     }]
