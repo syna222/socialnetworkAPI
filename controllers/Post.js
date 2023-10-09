@@ -11,6 +11,17 @@ const getAllPosts = async (req, res) => {
     }
 }
 
+const getSinglePost = async (req, res) => {
+    const { id } = req.params;
+    try{
+        const singlePost = await Post.findById(id).populate("likes");
+        res.status(201).json(singlePost);
+    }
+    catch(err){
+        res.status(404).send(err.message);
+    }
+}
+
 const createPost = async (req, res) => {
     const { datum, von, text } = req.body;
     try{
@@ -60,6 +71,7 @@ const deletePost = async (req, res) => {
 
 module.exports = {
     getAllPosts,
+    getSinglePost,
     createPost,
     addLike,
     removeLike,
