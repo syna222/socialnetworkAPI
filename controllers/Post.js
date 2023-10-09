@@ -22,6 +22,31 @@ const createPost = async (req, res) => {
     }
 }
 
+const addLike = async (req, res) => {
+    const { id } = req.params;
+    const { likerId } = req.body;
+    try{
+        const updatedPost = await Post.findByIdAndUpdate(id, {$addToSet: {likes: likerId}}, {new: true}).exec();
+        res.status(200).json(updatedPost);
+    }
+    catch(err){
+        res.status(404).send(err.message);
+    }
+}
+
+const removeLike = async (req, res) => {
+    const { id } = req.params;
+    const { likerId } = req.body;
+    try{
+        const updatedPost = await Post.findByIdAndUpdate(id, {$pull: { likes: likerId }}, {new: true}).exec();
+        res.status(200).json(updatedPost);
+    }
+    catch(err){
+        res.status(404).send(err.message);
+    }
+}
+
+
 const deletePost = async (req, res) => {
     const { id } = req.params;
     try{
@@ -36,5 +61,7 @@ const deletePost = async (req, res) => {
 module.exports = {
     getAllPosts,
     createPost,
+    addLike,
+    removeLike,
     deletePost
 }
