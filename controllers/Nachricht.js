@@ -39,7 +39,7 @@ const deleteSingleNachricht = async (req, res) => {
     const { id } = req.params;
     try{
         const deletedNachricht = await Nachricht.findByIdAndDelete(id);
-        res.status(200).send(`The todo ${deletedToDo.text} has successfully been deleted.`);
+        res.status(200).send(`The nachricht ${deletedNachricht.text} has successfully been deleted.`);
     }
     catch(err){
         res.status(404).send(err.message);
