@@ -1,9 +1,20 @@
 //require the model to query db:
 const User = require("../models/User");
 
+function compareUN(a, b){
+    if(a.username < b.username){
+        return -1;
+    }
+    if(a.username > b.username){
+        return 1;
+    }
+    return 0;
+}
+
 const getAllUsers = async (req, res) => {
     try{
         const users = await User.find();
+        users.sort(compareUN);
         res.status(200).json(users);  //json() is a send method
     }
     catch(err){
